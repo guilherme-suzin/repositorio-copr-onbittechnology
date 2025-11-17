@@ -30,5 +30,7 @@ Este build é mantido pela **Onbit Technology** para uso interno e público.
 Para instalar os pacotes compilados pela Onbit, basta habilitar o repositório COPR:
 
 ```bash
+sudo dnf install epel-release
+sudo dnf config-manager --set-enabled crb
 sudo dnf copr enable onbittechnology/onbit-samba
 sudo dnf install samba
