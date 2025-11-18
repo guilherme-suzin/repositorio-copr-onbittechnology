@@ -1,54 +1,84 @@
-# 🖧 Samba AD DC para RHEL 9.x / Rocky 9.x / AlmaLinux 9.x
+# 🖧 Samba AD DC para RHEL 9.x e RHEL 10
 
-**Repositório: `onbittechnology/repo-enterprise`**
+**Repositório: `onbittechnology/repo-enterprise` (Samba 4.23.x / 4.24.x)**
 
-Este repositório entrega versões atualizadas do **Samba 4.23.x** com suporte completo ao **Active Directory Domain Controller (AD DC)** para todo o ecossistema baseado em **RHEL 9**.
+Este repositório fornece versões corporativas atualizadas do **Samba AD DC** para todas as distribuições baseadas em:
 
-Compatível com:
+* **RHEL 9.x / CentOS Stream 9 / Rocky 9.x / AlmaLinux 9.x**
+* **RHEL 10 / CentOS Stream 10 / Rocky 10**
 
-* **Rocky Linux 9.x**
-* **AlmaLinux 9.x**
-* **RHEL 9.x**
-* **CentOS Stream 9**
-* **Oracle Linux 9.x**
+Mantido pela **Onbit Technology**.
 
 ---
 
-## 📦 Sobre
+## 📌 Sobre
 
-Os pacotes foram construídos seguindo as recomendações oficiais do **bootstrap Samba**, garantindo:
+Os pacotes são compilados seguindo as recomendações do **bootstrap oficial do Samba**, garantindo:
 
-* Ambiente estável e corporativo
-* Suporte AD DC completo
-* Compatibilidade total com MIT Kerberos
-* Dependências 100% alinhadas ao upstream Samba Team
-
-Repositório mantido pela **Onbit Technology**.
+* Ambientes AD DC estáveis
+* Compatibilidade 100% MIT Kerberos
+* Dependências alinhadas ao upstream
+* Instalação padronizada em `/usr`, `/etc/samba`, `/var/lib/samba`
 
 ---
 
-## 🚀 Pré-requisitos (obrigatórios)
+# 🚀 Instruções de Instalação
 
-Execute os comandos abaixo **antes** de instalar o Samba.
+Atenção:
+O procedimento muda ligeiramente entre **RHEL 9** e **RHEL 10**.
 
-### 1. Habilitar repositórios necessários
+---
+
+# ▶️ **1. Pré-requisitos (válidos para RHEL 9 e RHEL 10)**
 
 ```bash
 sudo dnf install -y dnf-plugins-core epel-release
 sudo dnf config-manager --set-enabled crb
+sudo dnf update -y
 ```
 
-### 2. Habilitar GlusterFS (dependência oficial Samba upstream)
+---
+
+# ▶️ **2. Dependências específicas por versão**
+
+---
+
+## 🟩 **RHEL 9.x / Rocky 9.x / AlmaLinux 9.x**
+
+O Samba upstream **exige GlusterFS 9 para build** no RHEL9.
+
+Instale:
 
 ```bash
 sudo dnf install -y centos-release-gluster9
 ```
 
+E depois:
+
+```bash
+sudo dnf install -y glusterfs-api-devel glusterfs-devel
+```
+
 ---
 
-## 🧰 Instalar pacotes obrigatórios
+## 🟦 **RHEL 10 / Rocky 10**
 
-Lista oficial do bootstrap Samba upstream:
+❗ **IMPORTANTE:**
+O RHEL 10 **não possui GlusterFS** nos repositórios e o Samba upstream no EL10 **não requer glusterfs-devel** para AD DC.
+
+Portanto, **NÃO instale**:
+
+* `centos-release-gluster9`
+* `glusterfs-api-devel`
+* `glusterfs-devel`
+
+Se instalar, irá quebrar o ambiente.
+
+---
+
+# 🧰 3. Instalar dependências do Samba (bootstrap oficial)
+
+Essas dependências funcionam **tanto no RHEL 9 quanto no RHEL 10**, com exceção dos pacotes Gluster listados acima.
 
 ```bash
 sudo dnf install -y \
@@ -58,7 +88,6 @@ sudo dnf install -y \
     cargo ccache chrpath clang-devel crypto-policies-scripts cups-devel \
     dbus-devel docbook-dtds docbook-style-xsl flex gawk gcc gdb git \
     glib2-devel glibc-common glibc-langpack-en \
-    glusterfs-api-devel glusterfs-devel \
     gnutls-devel gnutls-utils gpgme-devel gzip hostname \
     jansson-devel jq keyutils-libs-devel \
     krb5-devel krb5-server krb5-workstation \
@@ -80,30 +109,31 @@ sudo dnf install -y \
     xfsprogs-devel xz yum-utils zlib-devel
 ```
 
+📌 **Nota:**
+No RHEL10, simplesmente ignore os pacotes Gluster listados no bloco acima (eles não existem e não são mais necessários).
+
 ---
 
-## 🟪 Instalar o Samba da Onbit Technology
+# 🟪 4. Instalar Samba do repositório Onbit
 
 ```bash
-sudo dnf copr enable onbittechnology/repo-enterprise
-sudo dnf install samba
+sudo dnf copr enable onbittechnology/repo-enterprise -y
+sudo dnf install samba -y
 ```
 
 ---
 
-## 📘 Informações
-
-Os pacotes gerados seguem a estrutura padrão:
+# 📁 Estrutura instalada
 
 * `/usr/bin`
 * `/usr/sbin`
 * `/etc/samba`
 * `/var/lib/samba`
-* `/usr/lib64/samba` (private libs)
+* `/usr/lib64/samba` (libs privadas)
 
 ---
 
-## 👤 Maintainer
+# 👤 Maintainer
 
 **Onbit Technology — Infraestrutura & Segurança da Informação**
 🌐 [https://onbit.tech](https://onbit.tech)
