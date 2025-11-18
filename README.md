@@ -1,35 +1,56 @@
-🖧 Samba AD DC para RHEL 9.x / Rocky Linux 9.x / AlmaLinux 9.x
+# 🖧 Samba AD DC para RHEL 9.x / Rocky 9.x / AlmaLinux 9.x
 
-Repositório oficial de build do Samba 4.23.x mantido pela Onbit Technology
+**Repositório: `onbittechnology/repo-enterprise`**
 
-Este repositório disponibiliza o Samba 4.23.x com suporte completo a Active Directory Domain Controller (AD DC) para todas as distribuições baseadas em RHEL 9.x.
+Este repositório entrega versões atualizadas do **Samba 4.23.x** com suporte completo ao **Active Directory Domain Controller (AD DC)** para todo o ecossistema baseado em **RHEL 9**.
 
 Compatível com:
 
-Rocky Linux 9.x
+* **Rocky Linux 9.x**
+* **AlmaLinux 9.x**
+* **RHEL 9.x**
+* **CentOS Stream 9**
+* **Oracle Linux 9.x**
 
-AlmaLinux 9.x
+---
 
-RHEL 9.x
+## 📦 Sobre
 
-CentOS Stream 9
+Os pacotes foram construídos seguindo as recomendações oficiais do **bootstrap Samba**, garantindo:
 
-Oracle Linux 9.x
+* Ambiente estável e corporativo
+* Suporte AD DC completo
+* Compatibilidade total com MIT Kerberos
+* Dependências 100% alinhadas ao upstream Samba Team
 
-O pacote é construído seguindo o bootstrap oficial do Samba, garantindo todas as dependências necessárias para AD DC com MIT Kerberos.
+Repositório mantido pela **Onbit Technology**.
 
-🚀 Instalação (RHEL 9 / Rocky 9 / Alma 9)
-1. Habilite os repositórios necessários do sistema
+---
+
+## 🚀 Pré-requisitos (obrigatórios)
+
+Execute os comandos abaixo **antes** de instalar o Samba.
+
+### 1. Habilitar repositórios necessários
+
+```bash
 sudo dnf install -y dnf-plugins-core epel-release
 sudo dnf config-manager --set-enabled crb
+```
 
-2. Habilite o repositório GlusterFS 9 (dependência usada pelo Samba)
+### 2. Habilitar GlusterFS (dependência oficial Samba upstream)
+
+```bash
 sudo dnf install -y centos-release-gluster9
+```
 
-📦 Instalação dos Pré-Requisitos (bootstrap oficial do Samba)
+---
 
-Antes de instalar o Samba do repositório da Onbit, instale todos os pacotes obrigatórios utilizados pelo build oficial do Samba:
+## 🧰 Instalar pacotes obrigatórios
 
+Lista oficial do bootstrap Samba upstream:
+
+```bash
 sudo dnf install -y \
     --setopt=install_weak_deps=False \
     "@Development Tools" \
@@ -57,19 +78,33 @@ sudo dnf install -y \
     rpcsvc-proto-devel rsync sed sudo systemd-devel \
     tar tracker-devel tree utf8proc-devel wget which \
     xfsprogs-devel xz yum-utils zlib-devel
+```
 
+---
 
-Esses pacotes são exatamente os utilizados pela equipe do Samba nos bootstrap scripts oficiais.
+## 🟪 Instalar o Samba da Onbit Technology
 
-🔧 Instalar o Samba do repositório Onbit
+```bash
 sudo dnf copr enable onbittechnology/repo-enterprise
 sudo dnf install samba
+```
 
-🧩 Sobre
+---
 
-Este projeto é mantido pela:
+## 📘 Informações
 
-Onbit Technology – Infraestrutura, Segurança, Linux & Active Directory
-📧 suporte@onbit.tech
+Os pacotes gerados seguem a estrutura padrão:
 
-🌐 https://onbit.tech
+* `/usr/bin`
+* `/usr/sbin`
+* `/etc/samba`
+* `/var/lib/samba`
+* `/usr/lib64/samba` (private libs)
+
+---
+
+## 👤 Maintainer
+
+**Onbit Technology — Infraestrutura & Segurança da Informação**
+🌐 [https://onbit.tech](https://onbit.tech)
+📧 [suporte@onbit.tech](mailto:suporte@onbit.tech)
