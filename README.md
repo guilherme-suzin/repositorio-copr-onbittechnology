@@ -123,6 +123,11 @@ sudo dnf install samba -y
 
 ---
 
+#  Possíveis Erros
+Necessidade de remover o sssd-common;
+
+---
+
 # 📁 Estrutura instalada
 
 * `/usr/bin`
