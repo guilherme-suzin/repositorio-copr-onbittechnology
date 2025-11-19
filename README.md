@@ -89,7 +89,7 @@ sudo dnf install -y \
     dbus-devel docbook-dtds docbook-style-xsl flex gawk gcc gdb git \
     glib2-devel glibc-common glibc-langpack-en \
     gnutls-devel gnutls-utils gpgme-devel gzip hostname \
-    jansson-devel jq keyutils-libs-devel \
+    jansson-devel jq keyutils-libs-devel ldb-tools \
     krb5-devel krb5-server krb5-workstation \
     libacl-devel libarchive-devel libattr-devel libblkid-devel libbsd-devel \
     libcap-devel libevent-devel libicu-devel libpcap-devel \
