@@ -124,6 +124,8 @@ sudo dnf install samba -y
 
 #  Possíveis Erros
 Necessidade de remover o sssd-common;
+Necessidade de remover python3-tevent;
+Necessidade de remover samba* (antes de instalar o samba do repositório da Onbit);
 
 ---
 
